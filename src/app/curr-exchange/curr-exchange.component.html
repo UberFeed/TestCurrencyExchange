@@ -1,0 +1,27 @@
+<div class="curr-exchange">
+    <h2> Обмен валют</h2>
+    <div class="first_input data_input">
+        <select class="select_curr selected1" [(ngModel)]="selectedOption1" (ngModelChange)="CurrencyPair()">
+            <option > EUR</option>
+            <option> USD</option>
+            <option> UAH</option>
+            <option> PLN</option>
+            <option> GBP</option>
+        </select>
+        <div>
+            <input class="currency-value input1" (keydown)="CheckSymbol($event)" (keyup)="onSearchValue1Change()" placeholder="200" [(ngModel)]="inputValue1" />
+        </div>
+    </div>
+    <div class="second_input data_input">
+        <select class="select_curr selected2" [(ngModel)]="selectedOption2" (ngModelChange)="CurrencyRevertPair()">
+            <option> EUR</option>
+            <option> USD</option>
+            <option> UAH</option>
+            <option> PLN</option>
+            <option> GBP</option>
+        </select>
+        <div>
+            <input class="currency-value input2" (keydown)="CheckSymbol($event)" (keyup)="onSearchValue2Change()" placeholder="200" [(ngModel)]="inputValue2" />
+        </div>
+    </div>
+</div>
