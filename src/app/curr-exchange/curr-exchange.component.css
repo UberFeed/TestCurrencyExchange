@@ -1,9 +1,16 @@
 
 .curr-exchange {
     width: 320px;
-    height: 160px;
-    padding: 16px;
+    height: auto;
+    padding: 16px 16px 20px 16px;
     background-color: #c4c4c4;
+}
+
+.data_input {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: end;
 }
 
 .select_curr {
@@ -13,18 +20,9 @@
     background-color: #c4c4c4;
 }
 
-.select_curr option {
-    background-color: whitesmoke;
-}
-
-.data_input {
-    display: flex;
-    justify-content: space-between;
-}
-
-.first_input {
-    margin-bottom: 20px;
-}
+    .select_curr option {
+        background-color: whitesmoke;
+    }
 
 .currency-value {
     padding: 4px 6px;
@@ -34,8 +32,12 @@
     text-align: right;
 }
 
-.currency-value:focus-visible {
-    outline: none;
-    border: none;
-    border-bottom: 1px solid black;
+    .currency-value:focus-visible {
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+    }
+
+.alert {
+    color: red;
 }

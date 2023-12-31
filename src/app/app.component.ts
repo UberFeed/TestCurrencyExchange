@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentExchangeRate } from '../app/services/CurrentExchangeRate.service';
+import { ReverseCurrencyRate } from './Interfaces/ReverseCurrencyRate.interface';
 
 @Component({
   selector: 'app-root',
@@ -8,29 +9,22 @@ import { CurrentExchangeRate } from '../app/services/CurrentExchangeRate.service
 })
 export class AppComponent implements OnInit {
 
+
     constructor(
         public CurrencyRate: CurrentExchangeRate
     ) { }
 
-    CurrentRate: any;
+    title = 'TestCurrencyExchange';
+
+    CurrentRate: ReverseCurrencyRate[] = [];
 
     ngOnInit() {
-        this.CurrencyRate.CurrentRate().subscribe(
-            (data: any) => {
+        this.CurrencyRate.currentRate().subscribe(
+            (data: ReverseCurrencyRate[]) => {
                 this.CurrentRate = data;
-                console.log(this.CurrentRate);
             }
         );
     }
 
-    getObjectKeys(obj: any): any[] {
-        if (obj != null) {
-            return Object.keys(obj);
-        }
-        else {
-            return [];
-        }
-    }
-
-    title = 'TestCurrencyExchange';
+    
 }

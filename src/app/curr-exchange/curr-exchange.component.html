@@ -1,27 +1,21 @@
-<div class="curr-exchange">
+<div class="curr-exchange" [formGroup]="converterForm">
     <h2> Обмен валют</h2>
-    <div class="first_input data_input">
-        <select class="select_curr selected1" [(ngModel)]="selectedOption1" (ngModelChange)="CurrencyPair()">
-            <option > EUR</option>
-            <option> USD</option>
-            <option> UAH</option>
-            <option> PLN</option>
-            <option> GBP</option>
-        </select>
+    <div class="data_input">
         <div>
-            <input class="currency-value input1" (keydown)="CheckSymbol($event)" (keyup)="onSearchValue1Change()" placeholder="200" [(ngModel)]="inputValue1" />
+            <label class="alert" *ngIf="converterForm.controls['amount1'].invalid">Некорректный ввод</label>
+            <input class="currency-value" formControlName="amount1" (input)="convertCurrency('from')" />
         </div>
+        <select class="select_curr" formControlName="currency1" (change)="convertCurrency('from')">
+            <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+        </select>
     </div>
-    <div class="second_input data_input">
-        <select class="select_curr selected2" [(ngModel)]="selectedOption2" (ngModelChange)="CurrencyRevertPair()">
-            <option> EUR</option>
-            <option> USD</option>
-            <option> UAH</option>
-            <option> PLN</option>
-            <option> GBP</option>
-        </select>
+    <div class="data_input">
         <div>
-            <input class="currency-value input2" (keydown)="CheckSymbol($event)" (keyup)="onSearchValue2Change()" placeholder="200" [(ngModel)]="inputValue2" />
+            <label class="alert" *ngIf="converterForm.controls['amount2'].invalid">Некорректный ввод</label>
+            <input class="currency-value" formControlName="amount2" (input)="convertCurrency('to')" />
         </div>
+        <select class="select_curr" formControlName="currency2" (change)="convertCurrency('to')">
+            <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+        </select>
     </div>
 </div>

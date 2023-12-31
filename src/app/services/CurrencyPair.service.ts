@@ -1,6 +1,8 @@
 import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { CurrencyPairResponse } from '../Interfaces/CurrencyPairResponse.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -13,20 +15,16 @@ export class CurrencyPair {
 
     apiKey: string = "e13b84da86ec8d77f15acf0b";
 
-    CurrentPair(firstCurr: string, secondCurr: string, amount: number) {
+    currentPair(firstCurr: string, secondCurr: string, amount: number): Observable<number> {
         const url = `https://v6.exchangerate-api.com/v6/${this.apiKey}/pair/${firstCurr}/${secondCurr}/${amount}`;
 
-        try {
-            return this.http.get(url).pipe(map((data: any) => {
-                let convert = data['conversion_result'];
-
-                return convert;
-            }));
-        }
-        catch (error) {
-            console.error("Ошибка курса валют:", error);
-            throw error;
-        }
+        return this.http.get<CurrencyPairResponse>(url).pipe(
+            map(data => data.conversion_result),
+            catchError((error) => {
+                console.error("PairError:", error);
+                return throwError(() => new Error(error));
+            })
+        );
 
     }
 }
